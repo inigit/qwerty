@@ -29,7 +29,7 @@ module Qwerty
       self.log_presentation = self.to_log_presentation
     end
 
-    def done_log(event_name, actioner, actionee, params={})
+    def done_log(event_name, actioner, params={})
       {
         log_data: self.get_log_data(event_name, params),
         log_changes: self.get_log_changes
