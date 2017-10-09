@@ -17,7 +17,8 @@ module Qwerty
         response = RestClient.post(
           "#{Rails.application.secrets.log_server_url}/admin/logs",
           {
-            'X-Authentication-Token': session_token,
+            api_key: Rails.application.secrets.mrn_api_key,
+            secret: Rails.application.secrets.mrn_secret,
             log_type: actionee.log_type,
             log_action: event_name,
             log_user: actioner.id,
