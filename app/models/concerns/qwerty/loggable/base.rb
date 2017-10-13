@@ -9,7 +9,7 @@ module Qwerty
     end
 
     def get_log_changes
-      self.reload
+      self.reload unless self.destroyed?
 
       changes = {}
       self.to_log_presentation.each do |key, value|
