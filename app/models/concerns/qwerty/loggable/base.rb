@@ -22,7 +22,7 @@ module Qwerty
     end
 
     def get_log_data(event_name, params)
-      {}
+      params
     end
 
     def start_log
