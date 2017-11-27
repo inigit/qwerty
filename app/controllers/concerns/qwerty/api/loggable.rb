@@ -16,7 +16,7 @@ module Qwerty
       log_data['platform_type'] = actioner.browser
       log_data['device_info'] = actioner.device
       log_data['ip_address'] = actioner.ip_address
-      log_data['country'] = actioner.country
+      log_data['country'] = actioner.country_from_ip
       begin
         response = RestClient.post(
           "#{Rails.application.secrets.log_server_url}/admin/logs",
