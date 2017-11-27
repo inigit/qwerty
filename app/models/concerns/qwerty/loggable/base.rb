@@ -2,7 +2,7 @@ module Qwerty
   module Loggable::Base
     extend ActiveSupport::Concern
 
-    attr_accessor :log_presentation, :browser, :device
+    attr_accessor :log_presentation, :browser, :device, :ip_address, :country
 
     def to_log_presentation
       {}
@@ -29,6 +29,10 @@ module Qwerty
       self.log_presentation = self.to_log_presentation
       self.browser = request.headers['Client-Browser']
       self.device = request.headers['Client-Device']
+      self.ip_address = request.remote_ip
+      if Geocoder
+        self.country = Geocoder.search(self.ip_address).first.try{data['country_name']}
+      end
     end
 
     def done_log(event_name, actioner, params={})
