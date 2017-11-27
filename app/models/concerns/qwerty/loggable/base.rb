@@ -2,7 +2,7 @@ module Qwerty
   module Loggable::Base
     extend ActiveSupport::Concern
 
-    attr_accessor :log_presentation
+    attr_accessor :log_presentation, :browser, :device
 
     def to_log_presentation
       {}
@@ -25,8 +25,10 @@ module Qwerty
       params
     end
 
-    def start_log
+    def start_log(request)
       self.log_presentation = self.to_log_presentation
+      self.browser = request.headers['Client-Browser']
+      self.device = request.headers['Client-Device']
     end
 
     def done_log(event_name, actioner, params={})

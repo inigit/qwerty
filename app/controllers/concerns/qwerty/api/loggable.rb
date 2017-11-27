@@ -2,8 +2,8 @@ module Qwerty
   module Api::Loggable
     extend ActiveSupport::Concern
 
-    def start_log(actionee)
-      actionee.start_log
+    def start_log(actionee, request)
+      actionee.start_log(request)
     end
 
     def done_log(session_token, event_name, actioner, actionee, log_data={})
@@ -13,6 +13,8 @@ module Qwerty
     end
 
     def post_log(session_token, event_name, actioner, actionee, log_data, log_changes)
+      log_data['platform_type'] = actioner.browser
+      log_data['device_info'] = actioner.device
       begin
         response = RestClient.post(
           "#{Rails.application.secrets.log_server_url}/admin/logs",
