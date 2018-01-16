@@ -27,11 +27,13 @@ module Qwerty
 
     def start_log(request)
       self.log_presentation = self.to_log_presentation
-      self.browser = request.headers['Client-Browser']
-      self.device = request.headers['Client-Device']
-      self.ip_address = request.remote_ip
-      if Geocoder
-        self.country_from_ip = Geocoder.search(self.ip_address).first.try{data['country_name']}
+      if request
+        self.browser = request.headers['Client-Browser']
+        self.device = request.headers['Client-Device']
+        self.ip_address = request.remote_ip
+        if Geocoder
+          self.country_from_ip = Geocoder.search(self.ip_address).first.try{data['country_name']}
+        end
       end
     end
 
