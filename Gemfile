@@ -4,3 +4,4 @@ gemspec
 
 gem "byebug"
 gem "geocoder"
+gem 'ransack'
