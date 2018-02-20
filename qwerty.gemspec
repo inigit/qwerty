@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{qwerty}
-  s.version = "0.0.5"
+  s.version = "0.0.6"
   s.date = %q{2017-09-27}
   s.summary = %q{rails utilities dump}
   s.author= %q{Possum}
