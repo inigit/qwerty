@@ -66,41 +66,42 @@ class RmsNotificationsSender
       sourceType = 9
     end
 
-    if RmsNotificationsSender.check_notification_settings_for(user_id, type)
-      response = RestClient.post(
-        url,
-        {
-          content: content,
-          msgTypeId: msgTypeId,
-          source: sourceType,
-          userId: user_id,
-          senderUserId: sender_id,
-          feedsId: feedsId
-        }.to_json,
-        content_type: :json
-      )
-      json_response = JSON.parse(response.body)
-      if json_response["code"] != "0"
-        Rails.logger.error "Send notification: #{json_response["message"]}".red
-        false
-      else
-        true
-      end
-    end
+    # if RmsNotificationsSender.check_notification_settings_for(user_id, type)
+    #   response = RestClient.post(
+    #     url,
+    #     {
+    #       content: content,
+    #       msgTypeId: msgTypeId,
+    #       source: sourceType,
+    #       userId: user_id,
+    #       senderUserId: sender_id,
+    #       feedsId: feedsId
+    #     }.to_json,
+    #     content_type: :json
+    #   )
+    #   json_response = JSON.parse(response.body)
+    #   if json_response["code"] != "0"
+    #     Rails.logger.error "Send notification: #{json_response["message"]}".red
+    #     false
+    #   else
+    #     true
+    #   end
+    # end
+    true
   end
 
   def self.check_notification_settings_for(user_id, type=nil)
-    url = "#{Rails.application.secrets.notification_server_url}/profile/setting/notification/#{user_id}"
-    response = RestClient.get(url)
-    json_response = JSON.parse(response.body)
+    # url = "#{Rails.application.secrets.notification_server_url}/profile/setting/notification/#{user_id}"
+    # response = RestClient.get(url)
+    # json_response = JSON.parse(response.body)
 
     result = 1
-    case type
-    when "friend_request"
-      result = json_response["data"]["isAddFriendNotified"]
-    when "friend_request_email"
-      result = json_response["data"]["isAddFriendEmail"]
-    end
+    # case type
+    # when "friend_request"
+    #   result = json_response["data"]["isAddFriendNotified"]
+    # when "friend_request_email"
+    #   result = json_response["data"]["isAddFriendEmail"]
+    # end
     return result == 1
   end
 end
